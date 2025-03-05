@@ -113,12 +113,16 @@ class ProcessCameraProviderHostApiImpl extends ProcessCameraProviderHostApi {
   /// Retrives the list of CameraInfos corresponding to the available cameras.
   Future<List<CameraInfo>> getAvailableCameraInfosFromInstances(
       ProcessCameraProvider instance) async {
-    final int identifier = getProcessCameraProviderIdentifier(instance);
-    final List<int?> cameraInfos = await getAvailableCameraInfos(identifier);
-    return cameraInfos
-        .map<CameraInfo>((int? id) =>
-            instanceManager.getInstanceWithWeakReference<CameraInfo>(id!)!)
-        .toList();
+    try {
+      final int identifier = getProcessCameraProviderIdentifier(instance);
+      final List<int?> cameraInfos = await getAvailableCameraInfos(identifier);
+      return cameraInfos
+          .map<CameraInfo>((int? id) =>
+              instanceManager.getInstanceWithWeakReference<CameraInfo>(id!)!)
+          .toList();
+    } catch (e) {
+      return [];
+    }
   }
 
   /// Binds the specified [UseCase]s to the lifecycle of the camera which
