@@ -20,6 +20,7 @@ import io.flutter.view.TextureRegistry;
 public final class CameraAndroidCameraxPlugin implements FlutterPlugin, ActivityAware {
   private InstanceManager instanceManager;
   private FlutterPluginBinding pluginBinding;
+  private boolean hasPreviouslyAttached = false;
   @VisibleForTesting @Nullable public PendingRecordingHostApiImpl pendingRecordingHostApiImpl;
   @VisibleForTesting @Nullable public RecorderHostApiImpl recorderHostApiImpl;
   @VisibleForTesting @Nullable public VideoCaptureHostApiImpl videoCaptureHostApiImpl;
@@ -159,7 +160,10 @@ public final class CameraAndroidCameraxPlugin implements FlutterPlugin, Activity
     Activity activity = activityPluginBinding.getActivity();
 
     // Set up Host API implementations based on the context that `activity` provides.
-    setUp(pluginBinding.getBinaryMessenger(), activity, pluginBinding.getTextureRegistry());
+    if(!hasPreviouslyAttached) {
+      hasPreviouslyAttached = true;
+      setUp(pluginBinding.getBinaryMessenger(), activity, pluginBinding.getTextureRegistry());
+    }
 
     // Set any needed references to `activity` itself.
     updateLifecycleOwner(activity);
