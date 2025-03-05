@@ -118,10 +118,9 @@ class ProcessCameraProviderHostApiImpl extends ProcessCameraProviderHostApi {
       final List<int?> cameraInfos = await getAvailableCameraInfos(identifier);
       return cameraInfos
           .map<CameraInfo>((int? id) =>
-      instanceManager.getInstanceWithWeakReference<CameraInfo>(id!)!)
+              instanceManager.getInstanceWithWeakReference<CameraInfo>(id!)!)
           .toList();
-    }catch(e){
-      print("vls try-catch");
+    } catch (e) {
       return [];
     }
   }
