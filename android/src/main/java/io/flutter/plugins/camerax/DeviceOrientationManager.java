@@ -65,18 +65,18 @@ public class DeviceOrientationManager {
     // that was originally registered here. Are you missing a call to unregisterReceiver()?
     return;
     //
-    if (broadcastReceiver != null) {
-      return;
-    }
-    broadcastReceiver =
-        new BroadcastReceiver() {
-          @Override
-          public void onReceive(Context context, Intent intent) {
-            handleUIOrientationChange();
-          }
-        };
-    activity.registerReceiver(broadcastReceiver, orientationIntentFilter);
-    broadcastReceiver.onReceive(activity, null);
+//    if (broadcastReceiver != null) {
+//      return;
+//    }
+//    broadcastReceiver =
+//        new BroadcastReceiver() {
+//          @Override
+//          public void onReceive(Context context, Intent intent) {
+//            handleUIOrientationChange();
+//          }
+//        };
+//    activity.registerReceiver(broadcastReceiver, orientationIntentFilter);
+//    broadcastReceiver.onReceive(activity, null);
   }
 
   /** Stops listening for orientation updates. */
