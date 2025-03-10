@@ -60,6 +60,11 @@ public class DeviceOrientationManager {
    * the deliver orientation updates based on the UI orientation.
    */
   public void start() {
+    // Activity ua.privatbank.ap24v6.main.FlutterMainActivity has leaked IntentReceiver
+    // io.flutter.plugins.camerax.DeviceOrientationManager$1@6ac058
+    // that was originally registered here. Are you missing a call to unregisterReceiver()?
+    return;
+    //
     if (broadcastReceiver != null) {
       return;
     }
